@@ -2,7 +2,7 @@ node_modules/
 .DS_Store
 *.log
 .idea
-npm-debug.log
+npm-debug.log.*
 haters/
 variables.env
 variables.env.now

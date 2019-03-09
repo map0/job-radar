@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./public/sass/partials/placeholder.scss"],"names":[],"mappings":"AAAA;EACI,uBACJ,EAAC","file":"style.css","sourcesContent":[".test {\n    background-color: aqua\n}\n\n\n\n// WEBPACK FOOTER //\n// ./public/sass/partials/placeholder.scss"],"sourceRoot":""}
