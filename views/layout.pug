@@ -5,15 +5,31 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
     link(rel='stylesheet', type='text/css', href='/dist/style.css')
-    title Document
+    link(rel="icon" href="/images/icons/icons8-google-100.png")
+
+    title= `${title || h.siteName}`
   body
-    nav
-      ul.container
-        li All Jobs
-        li Tags
-        li Top
-        li Add
-        li Map
-        li.search
-          input.search-input(type='text', placeholder='Search')
-        li Logout
+    block header
+      nav
+        ul.container
+          each item in h.menuItems
+            li(class= currentPath.startsWith(item.slug) ? "active-tab" : '')
+              a.nav_link-logo(href=item.slug)
+                img(src=h.icon(item.icon))
+                span #{item.title}
+          li.search
+              input.search-input(type='text', placeholder='Search')
+          li
+              if user
+                span Logout
+              else
+                span Login
+
+    block jobPosts
+      p This is the default jobsposts list!
+
+    .content
+      block content
+        p This is the default content block!
+
+  script(src="/dist/App.bundle.js")
