@@ -38,6 +38,6 @@ html, body {
   margin: 0; }
 
 .active-tab {
-  background-color: orange !important; }
+  background-color: orange; }
 
 /*# sourceMappingURL=style.css.map*/
