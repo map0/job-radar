@@ -6,6 +6,12 @@ mixin JobPostForm(jobPost = {})
     input(type="text" name="title" value=`${jobPost.title}`)
     label(for="description") Description
     textarea(name="description")= jobPost.description
+    label(for="address") Address
+    input(type="text" id="address" name="location[address]" value=(jobPost.location && jobPost.location.address))
+    label(for="lng") Address Lng
+    input(type="text" id="lng" name="location[coordinates][0]" value=(jobPost.location && jobPost.location.coordinates[0]) required)
+    label(for="lat") Address Lat
+    input(type="text" id="lat" name="location[coordinates][1]" value=(jobPost.location && jobPost.location.coordinates[1]) required)
     - const choices = ['Java', 'Javascript', 'VueJS', 'ReactJS', 'AngularJS', 'C#', 'ASP', 'Python', 'Swift', 'Go', 'Solidity']
     - const tags = jobPost.tags || []
     ul.tags

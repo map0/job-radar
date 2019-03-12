@@ -19,6 +19,24 @@ const jobSchema = new mongoose.Schema({
   description: {
     type: String,
     trim: true
+  },
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  location: {
+    type: {
+      type: String,
+      default: 'Point'
+    },
+    coordinates: [{
+      type: Number,
+      required: 'You must supply coordinates'
+    }],
+    address: {
+      type: String,
+      required: 'You must supply a physical address'
+    }
   }
 })
 
