@@ -4,7 +4,10 @@ exports.siteName = 'JobRadar'
 
 exports.icon = (name) => `./images/icons/${name}.png`
 
-exports.iconSvg = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`);
+exports.iconSvg = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`)
+
+// Dump is a handy debugging function we can use to sort of "console.log" our data
+exports.dump = (obj) => JSON.stringify(obj, null, 2);
 
 exports.menuItems = [
   { slug: '/allJobs', title: 'All Jobs', icon: 'icons8-drag-list-down-64', },

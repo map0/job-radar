@@ -27,6 +27,7 @@ html(lang='en')
 
     block messages
       if locals.flashes
+        //- pre= h.dump(locals.flashes)
         .inner.inner--flashes
           .flash-messages
             - const categories = Object.keys(locals.flashes)
