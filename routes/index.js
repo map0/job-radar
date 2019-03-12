@@ -4,7 +4,9 @@ const { catchErrors } = require('../handlers/errorHandlers')
 
 const router = express.Router()
 
-router.get('/', jobPostControllers.home)
+router.get('/', catchErrors(jobPostControllers.getJobPosts))
+
+router.get('/jobPosts', catchErrors(jobPostControllers.getJobPosts));
 
 router.get('/add', catchErrors(jobPostControllers.addJobPost))
 router.post('/add', catchErrors(jobPostControllers.createJobPost))

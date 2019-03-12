@@ -1,0 +1,10 @@
+extends layout
+
+include mixins/jobPostCard
+
+block content
+  .inner
+    h2= title
+      .jobPosts
+        each jobPost in jobPosts
+          +jobPostCard(jobPost)

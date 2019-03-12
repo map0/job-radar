@@ -10,7 +10,7 @@ exports.iconSvg = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`)
 exports.dump = (obj) => JSON.stringify(obj, null, 2);
 
 exports.menuItems = [
-  { slug: '/allJobs', title: 'All Jobs', icon: 'icons8-drag-list-down-64', },
+  { slug: '/jobPosts', title: 'All Jobs', icon: 'icons8-drag-list-down-64', },
   { slug: '/tags', title: 'Tags', icon: 'icons8-tags-64', },
   { slug: '/top', title: 'Top', icon: 'icons8-up-squared-64', },
   { slug: '/add', title: 'Add', icon: 'icons8-plus-64', },

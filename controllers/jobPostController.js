@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
 const JobPostModel = mongoose.model('JobPost')
 
-exports.home = (req, res) => {
-  res.render('layout')
+exports.getJobPosts = async (req, res) => {
+  const jobPosts = await JobPostModel.find()
+  res.render('jobPosts', { title: 'Job Posts', jobPosts });
 }
 
 exports.addJobPost = (req, res) => {
@@ -10,8 +11,7 @@ exports.addJobPost = (req, res) => {
 }
 
 exports.createJobPost = async (req, res) => {
-  const jobPost = new JobPostModel(req.body)
-  await jobPost.save()
+  const jobPost = await (new JobPostModel(req.body)).save()
   req.flash('success', `Successfully created a job post for ${jobPost.title}. Goog luck!`)
-  res.redirect('/')
+  res.redirect(`/jobPost/${jobPost.slug}`)
 }

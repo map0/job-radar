@@ -1,0 +1,10 @@
+mixin jobPostCard(jobPost={})
+  .jobPost
+    .jobPost__hero
+      .jobPost__actions
+        button soon
+      img(src=`/uploads/${jobPost.photo || 'images.jpeg'}`)
+      h2.title
+        a(href=`/jobPost/${jobPost.slug}`) #{jobPost.title}
+    .jobPost__details
+      p= jobPost.description.split(' ').slice(0, 25).join(' ')
