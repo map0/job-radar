@@ -15,3 +15,15 @@ exports.createJobPost = async (req, res) => {
   req.flash('success', `Successfully created a job post for ${jobPost.title}. Goog luck!`)
   res.redirect(`/jobPost/${jobPost.slug}`)
 }
+
+exports.editJobPost = async (req, res) => {
+  const jobPost = await JobPostModel.findOne({ _id: req.params.id })
+  res.render('editJobPost', { title: 'Edit Job Post', jobPost });
+}
+
+exports.updateJobPost = async (req, res) => {
+  const jobPost = await JobPostModel.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true, ruValidators: true})
+
+  req.flash('success', `Succesfully updated <strong>${jobPost.title}</strong>`)
+  res.redirect(`/jobPost/${jobPost.id}/edit`)
+}
