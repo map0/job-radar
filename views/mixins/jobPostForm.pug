@@ -1,0 +1,16 @@
+mixin JobPostForm(jobPost = {})
+  form(action="/add", method="POST" class="card")
+    label(for="company") Company: &nbsp #{jobPost.title}
+    input(type="text" name="company")
+    label(for="title") Title: &nbsp #{jobPost.title}
+    input(type="text" name="title")
+    label(for="description") Description
+    textarea(name="description")= jobPost.description
+    - const choices = ['Java', 'Javascript', 'VueJS', 'ReactJS', 'AngularJS', 'C#', 'ASP', 'C', 'Swift', 'Go', 'Solidity']
+    - const tags = jobPost.tags || []
+    ul.tags
+      each choice in choices
+        .tag.tag__choice
+          label(for=choice) #{choice}
+          input(type="checkbox" id=choice value=choice name="tags" checked=(tags.includes(choice)))
+    input(type="submit" value="Save →" class="button")
