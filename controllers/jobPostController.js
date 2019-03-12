@@ -12,5 +12,6 @@ exports.addJobPost = (req, res) => {
 exports.createJobPost = async (req, res) => {
   const jobPost = new JobPostModel(req.body)
   await jobPost.save()
+  req.flash('success', `Successfully created a job post for ${jobPost.title}. Goog luck!`)
   res.redirect('/')
 }
