@@ -37,7 +37,8 @@ const jobSchema = new mongoose.Schema({
       type: String,
       required: 'You must supply a physical address'
     }
-  }
+  },
+  photo: String
 })
 
 jobSchema.pre('save', function (next) {

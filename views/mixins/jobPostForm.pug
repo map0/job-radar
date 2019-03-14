@@ -1,11 +1,17 @@
 mixin JobPostForm(jobPost = {})
-  form(action=`/add/${jobPost._id || ''}`, method="POST" class="card")
+  form(action=`/add/${jobPost._id || ''}`, method="POST" class="card" enctype="multipart/form-data")
     label(for="company") Company: &nbsp #{jobPost.company || ''}
     input(type="text" name="company" value=jobPost.company)
     label(for="title") Title: &nbsp #{jobPost.title}
     input(type="text" name="title" value=`${jobPost.title || ''}`)
     label(for="description") Description
     textarea(name="description")= jobPost.description
+    //- Image Upload
+    label(for="photo") Photo
+      input(type="file" name="photo" id="photo" accept="image/gif, image/png, image/jpeg")
+      if jobPost.photo
+        img(src=`/uploads/${jobPost.photo}`, alt=jobPost.title width=200)
+    //- address, lng and lat
     label(for="address") Address
     input(type="text" id="address" name="location[address]" value=(jobPost.location && jobPost.location.address))
     label(for="lng") Address Lng
