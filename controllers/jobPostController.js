@@ -22,6 +22,8 @@ exports.editJobPost = async (req, res) => {
 }
 
 exports.updateJobPost = async (req, res) => {
+  // set the location data to be a Point
+  req.body.location.type = 'Point'
   const jobPost = await JobPostModel.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true, ruValidators: true})
 
   req.flash('success', `Succesfully updated <strong>${jobPost.title}</strong>`)
