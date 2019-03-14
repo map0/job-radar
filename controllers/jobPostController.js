@@ -60,5 +60,11 @@ exports.updateJobPost = async (req, res) => {
   const jobPost = await JobPostModel.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true, ruValidators: true})
 
   req.flash('success', `Succesfully updated <strong>${jobPost.title}</strong>`)
-  res.redirect(`/jobPost/${jobPost.id}/edit`)
+  res.redirect(`/jobPosts/${jobPost.id}/edit`)
+}
+
+exports.getJobPostBySlug = async (req, res) => {
+  const jobPost = await JobPostModel.findOne({ slug: req.params.slug })
+  if (!jobPost) return next()
+  res.render('jobPost', { jobPost, title: jobPost.title})
 }

@@ -45,7 +45,7 @@ jobSchema.pre('save', function (next) {
   if (!this.isModified('title')) {
     return next()
   }
-  this.slug = `${slug(this.company)}/${slug(this.title)}`
+  this.slug = `${slug(this.company)}-${slug(this.title)}`
   next()
 })
 

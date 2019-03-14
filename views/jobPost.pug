@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  //- pre= h.dump(jobPost)
+  .single
+    .single__hero
+      img.single__image(src=`/uploads/${jobPost.photo || 'imageDefaultJobPost.jpeg'}`)
+      h2.title.title--single
+        a(href=`/jobPost/${jobPost.slug}`) #{jobPost.name}
+
+  .single__details.inner
+    img.single__map(src=h.staticMap(jobPost.location.coordinates))
+    p.single__location= jobPost.location.address
+    p= jobPost.description
+
+    if jobPost.tags
+      ul.tags
+        each tag in jobPost.tags
+          li.tag
+            a.tag__link(href=`/tags/${tag}`)
+              span.tag__text  ##{tag}

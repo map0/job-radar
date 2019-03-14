@@ -2,7 +2,7 @@ const fs = require('fs')
 
 exports.siteName = 'JobRadar'
 
-exports.icon = (name) => `./images/icons/${name}.png`
+exports.icon = (name) => `../../images/icons/${name}.png`
 
 exports.iconSvg = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`)
 
@@ -16,3 +16,5 @@ exports.menuItems = [
   { slug: '/add', title: 'Add', icon: 'icons8-plus-64', },
   { slug: '/map', title: 'Map', icon: 'icons8-google-maps-64', },
 ]
+
+exports.staticMap = ([lng, lat]) => `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=14&size=800x150&key=${process.env.MAP_KEY}&markers=${lat},${lng}&scale=2`
