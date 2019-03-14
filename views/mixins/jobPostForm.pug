@@ -1,9 +1,9 @@
 mixin JobPostForm(jobPost = {})
   form(action=`/add/${jobPost._id || ''}`, method="POST" class="card")
-    label(for="company") Company: &nbsp #{jobPost.title}
+    label(for="company") Company: &nbsp #{jobPost.company || ''}
     input(type="text" name="company" value=jobPost.company)
     label(for="title") Title: &nbsp #{jobPost.title}
-    input(type="text" name="title" value=`${jobPost.title}`)
+    input(type="text" name="title" value=`${jobPost.title || ''}`)
     label(for="description") Description
     textarea(name="description")= jobPost.description
     label(for="address") Address

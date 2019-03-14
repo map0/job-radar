@@ -41,7 +41,7 @@ const jobSchema = new mongoose.Schema({
 })
 
 jobSchema.pre('save', function (next) {
-  if (!this.isModified('name')) {
+  if (!this.isModified('title')) {
     return next()
   }
   this.slug = `${slug(this.company)}/${slug(this.title)}`
