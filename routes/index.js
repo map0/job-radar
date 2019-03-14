@@ -21,5 +21,7 @@ router.post('/add/:id',
 
 router.get('/jobPost/:slug', catchErrors(jobPostControllers.getJobPostBySlug))
 
+router.get('/tags', catchErrors(jobPostControllers.getjobPostByTag));
+router.get('/tags/:tag', catchErrors(jobPostControllers.getjobPostByTag));
 
 module.exports = router

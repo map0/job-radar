@@ -68,3 +68,9 @@ exports.getJobPostBySlug = async (req, res) => {
   if (!jobPost) return next()
   res.render('jobPost', { jobPost, title: jobPost.title})
 }
+
+exports.getjobPostByTag = async (req, res) => {
+  const tags = await JobPostModel.getTagsList();
+  const tag = req.params.tag;
+  res.render('tag', { tags, title: 'Tags', tag });
+}
