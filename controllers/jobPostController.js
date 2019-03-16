@@ -70,7 +70,11 @@ exports.getJobPostBySlug = async (req, res) => {
 }
 
 exports.getjobPostByTag = async (req, res) => {
-  const tags = await JobPostModel.getTagsList();
   const tag = req.params.tag;
-  res.render('tag', { tags, title: 'Tags', tag });
+  const tagQuery = tag || { $exists: true, $ne: [] }
+  const tagsPromise = JobPostModel.getTagsList()
+  const jobPostsPromise = JobPostModel.find({ tags: tagQuery })
+  const [tags, jobPosts] = await Promise.all([tagsPromise, jobPostsPromise])
+
+  res.render('tag', { tags, title: 'Tags', tag, jobPosts })
 }
