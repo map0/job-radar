@@ -26,5 +26,6 @@ router.get('/tags', catchErrors(jobPostControllers.getjobPostByTag));
 router.get('/tags/:tag', catchErrors(jobPostControllers.getjobPostByTag));
 
 router.get('/login', userControllers.loginForm)
+router.get('/register', userControllers.registerForm)
 
 module.exports = router
