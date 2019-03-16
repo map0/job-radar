@@ -10,6 +10,7 @@ mongoose.connection.on('error', (err) => {
   console.error(`Oh nooo -> ${err.message}`)
 })
 require('./models/JobPost')
+require('./models/User')
 
 const app = require('./app');
 
