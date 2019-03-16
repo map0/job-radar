@@ -4,11 +4,15 @@ const session = require('express-session')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const MongoStore = require('connect-mongo')(session)
+const expressValidator = require('express-validator')
 const path = require('path')
 const flash = require('connect-flash')
+const passport = require('passport')
 const routes = require('./routes/index')
 const helpers = require('./helpers')
 const errorHandlers = require('./handlers/errorHandlers')
+
+require('./handlers/passport')
 
 const app = express()
 
@@ -19,6 +23,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use(expressValidator())
+
 app.use(cookieParser());
 
 app.use(session({
@@ -28,6 +34,9 @@ app.use(session({
   saveUninitialized: false,
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(flash())
 

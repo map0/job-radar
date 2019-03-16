@@ -1,6 +1,7 @@
 const express = require('express')
 const jobPostControllers = require('../controllers/jobPostController')
 const userControllers = require('../controllers/userController')
+const authController = require('../controllers/authController')
 const { catchErrors } = require('../handlers/errorHandlers')
 
 const router = express.Router()
@@ -27,5 +28,9 @@ router.get('/tags/:tag', catchErrors(jobPostControllers.getjobPostByTag));
 
 router.get('/login', userControllers.loginForm)
 router.get('/register', userControllers.registerForm)
+router.post('/register',
+  userControllers.validateRegister,
+  catchErrors(userControllers.register),
+  authController.login)
 
 module.exports = router
