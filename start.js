@@ -19,5 +19,4 @@ app.listen(app.get('port'), () => {
   console.log(`Express running on PORT ${app.get('port')}`)
 })
 
-// TEMP send email
-require('./handlers/mailtrap')
+
