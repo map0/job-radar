@@ -238,6 +238,14 @@ img {
     content: '\2665\FE0F';
     margin-right: 1rem; } }
 
+.avatar {
+  min-width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center; }
+
 .card {
   background: #f2f3c5;
   padding: 5rem;
