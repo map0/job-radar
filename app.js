@@ -44,6 +44,7 @@ app.use((req, res, next) => {
   res.locals.h = helpers
   res.locals.currentPath = req.path
   res.locals.flashes = req.flash()
+  res.locals.user = req.user || null
   next()
 })
 
