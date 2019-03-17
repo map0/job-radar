@@ -12,6 +12,13 @@ exports.registerForm = (req, res) => {
   res.render('register', { title: 'Register' })
 }
 
+exports.register = async (req, res, next) => {
+  const user = new User({ email: req.body.email, name: req.body.name })
+  const register = promisify(User.register.bind(User))
+  await register(user, req.body.password)
+  next() // pass to authController.login
+}
+
 exports.validateRegister = (req, res, next) => {
   req.sanitizeBody('name')
   req.checkBody('name', 'You must supply a name!').notEmpty()
@@ -32,11 +39,4 @@ exports.validateRegister = (req, res, next) => {
     return // stop the fn from running
   }
   next()
-}
-
-exports.register = async (req, res, next) => {
-  const user = new User({ email: req.body.email, name: req.body.name })
-  const register = promisify(User.register.bind(User))
-  await register(user, req.body.password)
-  next() // pass to authController.login
 }
