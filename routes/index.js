@@ -43,4 +43,7 @@ router.post('/register',
   catchErrors(userControllers.register),
   authController.login)
 
+router.get('/account', authController.isLoggedIn, userControllers.account)
+router.post('/account', catchErrors(userControllers.updateAccount))
+
 module.exports = router
