@@ -27,7 +27,9 @@ const jobSchema = new mongoose.Schema({
   location: {
     type: {
       type: String,
-      default: 'Point'
+      default: 'Point',
+      enum: ['Point'],
+      index: true
     },
     coordinates: [{
       type: Number,
@@ -36,14 +38,17 @@ const jobSchema = new mongoose.Schema({
     address: {
       type: String,
       required: 'You must supply a physical address'
-    }
+    },
   },
   photo: String,
   author: {
     type: mongoose.Schema.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: 'You must supply an author'
   },
 })
+
+jobSchema.index({ location: '2dsphere' })
 
 jobSchema.index({
   title: 'text',

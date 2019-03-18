@@ -52,5 +52,7 @@ router.post('/account/reset/:token',
   catchErrors(authController.update))
 
 router.get('/api/search', catchErrors(jobPostControllers.searchJobPosts))
+router.get('/api/jobPosts/near', catchErrors(jobPostControllers.mapJobPosts));
+
 
 module.exports = router
