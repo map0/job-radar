@@ -45,6 +45,11 @@ const jobSchema = new mongoose.Schema({
   },
 })
 
+jobSchema.index({
+  title: 'text',
+  description: 'text'
+})
+
 jobSchema.pre('save', function (next) {
   if (!this.isModified('title')) {
     return next()

@@ -86,3 +86,23 @@ exports.getjobPostByTag = async (req, res) => {
 
   res.render('tag', { tags, title: 'Tags', tag, jobPosts })
 }
+
+exports.searchJobPosts = async (req, res) => {
+  // res.json(req.query)
+  const jobPosts = await JobPostModel
+  // first find stores that match
+  .find({
+    $text: {
+      $search: req.query.q
+    }
+  }, {
+    score: { $meta: 'textScore' }
+  })
+  // the sort them
+  .sort({
+    score: { $meta: 'textScore' }
+  })
+  // limit to only 5 results
+  .limit(5)
+  res.json(jobPosts)
+}

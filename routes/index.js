@@ -51,4 +51,6 @@ router.post('/account/reset/:token',
   authController.confirmedPasswords,
   catchErrors(authController.update))
 
+router.get('/api/search', catchErrors(jobPostControllers.searchJobPosts))
+
 module.exports = router
