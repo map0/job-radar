@@ -1,8 +1,8 @@
 const nodemailer = require('nodemailer')
 const promisify = require('es6-promisify')
-// const pug = require('pug')
-// const juice = require('juice')
-// const htmlToText = require('html-to-text')
+const pug = require('pug')
+const htmlToText = require('html-to-text')
+const juice = require('juice')
 
 const transport = nodemailer.createTransport({
   host: process.env.MAIL_HOST,
@@ -21,14 +21,22 @@ const transport = nodemailer.createTransport({
 //   text: 'Hey I really do **love** ya'
 // })
 
+const generateHTML = (filename, options = {}) => {
+  const html = pug.renderFile(`${__dirname}/../views/email/${filename}.pug`, options)
+  const inlined = juice(html);
+  return inlined
+}
 
 exports.send = async (options) => {
+  const html = generateHTML(options.filename, options)
+  const text = htmlToText.fromString(html)
+
   const mailOptions = {
     from: 'Job Radar Service <noreply@jobradar.com>',
     to: options.user.email,
     subject: options.subject,
-    html: 'to be filled in later',
-    text: 'as well to be filled in later'
+    html,
+    text
   }
   return transport.sendMail(mailOptions)
 }
