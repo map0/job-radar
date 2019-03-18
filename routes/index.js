@@ -15,7 +15,7 @@ router.get('/jobPosts/:id/edit',
 
 router.get('/add',
   authController.isLoggedIn,
-  catchErrors(jobPostControllers.addJobPost))
+  jobPostControllers.addJobPost)
 router.post('/add',
   authController.isLoggedIn,
   jobPostControllers.upload,
