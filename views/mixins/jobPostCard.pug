@@ -2,9 +2,10 @@ mixin jobPostCard(jobPost={})
   .jobPost
     .jobPost__hero
       .jobPost__actions
-        .jobPost__action.jobPost__action--edit
-          a(href=`/jobPosts/${jobPost._id}/edit`)
-            != h.iconSvg('pencil')
+        if user && jobPost.author.equals(user._id)
+          .jobPost__action.jobPost__action--edit
+            a(href=`/jobPosts/${jobPost._id}/edit`)
+              != h.iconSvg('pencil')
       img(src=`/uploads/${jobPost.photo || 'imageDefaultJobPost.jpeg'}`)
       h2.title
         a(href=`/jobPost/${jobPost.slug}`) #{jobPost.title}

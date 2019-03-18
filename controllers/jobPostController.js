@@ -44,13 +44,21 @@ exports.addJobPost = (req, res) => {
 }
 
 exports.createJobPost = async (req, res) => {
+  req.body.author = req.user._id
   const jobPost = await (new JobPostModel(req.body)).save()
   req.flash('success', `Successfully created a job post for ${jobPost.title}. Goog luck!`)
   res.redirect(`/jobPost/${jobPost.slug}`)
 }
 
+const confirmOwner = (jobPost, user) => {
+  if (!jobPost.author.equals(user._id)) {
+    throw Error('You must own a store in order to edit it!')
+  }
+}
+
 exports.editJobPost = async (req, res) => {
   const jobPost = await JobPostModel.findOne({ _id: req.params.id })
+  confirmOwner(jobPost, req.user)
   res.render('editJobPost', { title: 'Edit Job Post', jobPost })
 }
 
@@ -58,7 +66,7 @@ exports.updateJobPost = async (req, res) => {
   // set the location data to be a Point
   req.body.location.type = 'Point'
   const jobPost = await JobPostModel.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true, ruValidators: true})
-
+  confirmOwner(jobPost, req.user)
   req.flash('success', `Succesfully updated <strong>${jobPost.title}</strong>`)
   res.redirect(`/jobPosts/${jobPost.id}/edit`)
 }
