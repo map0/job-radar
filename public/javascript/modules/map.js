@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { $ } from './bling'
 
 const defaultLat  = 42.6648323
 const defafultLng = 23.26632
@@ -34,7 +35,7 @@ function loadPlaces(map, lat = defaultLat, lng = defafultLng) {
           <div class="popup">
             <a href="/jobPosts/${this.place.slug}">
               <img src="/uploads/${this.place.photo || 'jobPost.png'}" alt="${this.place.title}" />
-              <p><strong>${this.place.title}</string></p>
+              <p><strong>${this.place.title}</strong></p>
               <p><i><small>${this.place.location.address}</small></i></p>
             </a>
           </div>
@@ -53,6 +54,13 @@ function makeMap(mapDiv) {
   // make our map
   const map = new google.maps.Map(mapDiv, mapOptions)
   loadPlaces(map)
+
+  const input = $('[name="geolocate"]')
+  const autocomplete = new google.maps.places.Autocomplete(input)
+  autocomplete.addListener('place_changed', () => {
+    const place = autocomplete.getPlace()
+    loadPlaces(map, place.geometry.location.lat(), place.geometry.location.lng())
+  })
 }
 
 export default makeMap
