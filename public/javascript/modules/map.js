@@ -11,26 +11,29 @@ const mapOptions = {
 function loadPlaces(map, lat = defaultLat, lng = defafultLng) {
   axios.get(`/api/jobPosts/near?lat=${lat}&lng=${lng}`)
     .then(res => {
-      const places = res.data;
+      const places = res.data
       if (!places.length) {
-        alert('no places found!');
-        return;
+        alert('no places found!')
+        return
       }
       // create a bounds
-      const bounds = new google.maps.LatLngBounds();
+      const bounds = new google.maps.LatLngBounds()
 
       const markers = places.map(place => {
-        const [placeLng, placeLat] = place.location.coordinates;
-        const position = { lat: placeLat, lng: placeLng };
-        bounds.extend(position);
-        const marker = new google.maps.Marker({ map, position });
-        marker.place = place;
-        return marker;
+        const [placeLng, placeLat] = place.location.coordinates
+        const position = { lat: placeLat, lng: placeLng }
+        bounds.extend(position)
+        const marker = new google.maps.Marker({ map, position })
+        marker.place = place
+        return marker
       })
-    })
-        // when someone clicks on a marker, show the details of that place
+      
+      // when someone clicks on a marker, show the details of that place
       // markers.forEach...
 
+      map.setCenter(bounds.getCenter())
+      map.fitBounds(bounds)
+    })
 }
 
 function makeMap(mapDiv) {
