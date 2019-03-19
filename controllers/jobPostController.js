@@ -125,3 +125,7 @@ exports.mapJobPosts = async (req, res) => {
   const jobPosts = await JobPostModel.find(q).select('slug title description location photo').limit(10)
   res.json(jobPosts)
 }
+
+exports.mapPage = (req, res) => {
+  res.render('map', { title: 'Map' });
+}

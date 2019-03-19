@@ -51,6 +51,8 @@ router.post('/account/reset/:token',
   authController.confirmedPasswords,
   catchErrors(authController.update))
 
+router.get('/map', jobPostControllers.mapPage);
+
 router.get('/api/search', catchErrors(jobPostControllers.searchJobPosts))
 router.get('/api/jobPosts/near', catchErrors(jobPostControllers.mapJobPosts));
 
