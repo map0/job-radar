@@ -18,6 +18,7 @@ function loadPlaces(map, lat = defaultLat, lng = defafultLng) {
       }
       // create a bounds
       const bounds = new google.maps.LatLngBounds()
+      const infoWindow = new google.maps.InfoWindow();
 
       const markers = places.map(place => {
         const [placeLng, placeLat] = place.location.coordinates
@@ -27,9 +28,20 @@ function loadPlaces(map, lat = defaultLat, lng = defafultLng) {
         marker.place = place
         return marker
       })
-      
-      // when someone clicks on a marker, show the details of that place
-      // markers.forEach...
+
+      markers.forEach(marker => marker.addListener('click', function() {
+        const html = `
+          <div class="popup">
+            <a href="/jobPosts/${this.place.slug}">
+              <img src="/uploads/${this.place.photo || 'jobPost.png'}" alt="${this.place.title}" />
+              <p><strong>${this.place.title}</string></p>
+              <p><i><small>${this.place.location.address}</small></i></p>
+            </a>
+          </div>
+        `
+        infoWindow.setContent(html)
+        infoWindow.open(map, this)
+      }))
 
       map.setCenter(bounds.getCenter())
       map.fitBounds(bounds)
