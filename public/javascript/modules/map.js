@@ -33,7 +33,7 @@ function loadPlaces(map, lat = defaultLat, lng = defafultLng) {
       markers.forEach(marker => marker.addListener('click', function() {
         const html = `
           <div class="popup">
-            <a href="/jobPosts/${this.place.slug}">
+            <a href="/jobPost/${this.place.slug}">
               <img src="/uploads/${this.place.photo || 'jobPost.png'}" alt="${this.place.title}" />
               <p><strong>${this.place.title}</strong></p>
               <p><i><small>${this.place.location.address}</small></i></p>
