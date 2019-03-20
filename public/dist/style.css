@@ -552,4 +552,17 @@ label {
     margin-bottom: 2rem;
     border-bottom: 1px solid #e6e6e6; }
 
+.map {
+  padding: 20px;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.05); }
+
+#map {
+  height: 500px; }
+
+.popup {
+  width: 120px; }
+  .popup img {
+    width: 100%; }
+
 /*# sourceMappingURL=style.css.map*/
